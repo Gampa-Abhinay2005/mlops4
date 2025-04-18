@@ -1,7 +1,7 @@
 # ui/main.py
 
-import streamlit as st
 import requests
+import streamlit as st
 
 API_BASE_URL = "http://localhost:8000"
 
@@ -35,7 +35,7 @@ def transcript_upload_ui():
             st.session_state.aligned_transcript = output.get("transcript", [])
 
         except Exception as e:
-            st.error(f"❌ Error: {str(e)}")
+            st.error(f"❌ Error: {e!s}")
 
     # Only show results if transcript is available
     if "raw_transcript" in st.session_state and "aligned_transcript" in st.session_state:

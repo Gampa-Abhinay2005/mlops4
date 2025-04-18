@@ -1,5 +1,7 @@
 from prefect import flow, task
+
 from app.services.sentiment import analyze_sentiment
+
 
 @task
 def sentiment_analysis(text: str) -> str:

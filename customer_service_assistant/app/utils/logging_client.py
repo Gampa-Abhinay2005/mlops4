@@ -2,6 +2,7 @@
 
 import zmq
 from loguru import logger
+
 from .config_loader import load_toml_config
 
 config = load_toml_config("log_config.toml")["logging"]

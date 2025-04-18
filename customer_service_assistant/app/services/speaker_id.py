@@ -1,5 +1,6 @@
-from faster_whisper import WhisperModel
 import os
+
+from faster_whisper import WhisperModel
 
 # Load Whisper Model (faster)
 whisper_model = WhisperModel("base", device="cuda" if os.environ.get("USE_CUDA") == "1" else "cpu")
@@ -8,8 +9,7 @@ whisper_model = WhisperModel("base", device="cuda" if os.environ.get("USE_CUDA")
 # You can replace this with a custom method if you have any specific segmentation logic
 
 def transcribe_audio(file_path: str):
-    """
-    Transcribes audio using Whisper and returns the transcript with proper timestamps.
+    """Transcribes audio using Whisper and returns the transcript with proper timestamps.
     """
     segments, _ = whisper_model.transcribe(file_path)
     transcript = []
@@ -17,7 +17,7 @@ def transcribe_audio(file_path: str):
         transcript.append({
             "start": float(segment.start),
             "end": float(segment.end),
-            "text": segment.text.strip()
+            "text": segment.text.strip(),
         })
     return transcript
 
@@ -25,16 +25,16 @@ def transcribe_audio(file_path: str):
 def simple_speaker_diarization(file_path: str):
     transcript = transcribe_audio(file_path)
     speakers = []
-    
+
     speaker_labels = ["Speaker 1", "Speaker 2"]
     for i, segment in enumerate(transcript):
         speaker = speaker_labels[i % 2]  # Alternate speakers
         speakers.append({
             "start": segment["start"],
             "end": segment["end"],
-            "speaker": speaker
+            "speaker": speaker,
         })
-    
+
     return speakers
 
 
@@ -44,13 +44,13 @@ def align_transcript_with_speakers(transcript, speakers):
         line_start = line["start"]
         speaker_label = next(
             (sp["speaker"] for sp in speakers if sp["start"] <= line_start <= sp["end"]),
-            "Unknown"
+            "Unknown",
         )
         aligned.append({
             "speaker": speaker_label,
             "text": line["text"],
             "start": line["start"],
-            "end": line["end"]
+            "end": line["end"],
         })
     return aligned
 
@@ -59,7 +59,7 @@ def detect_roles_from_keywords(aligned_transcript):
         "please hold", "let me check", "i can help", "how may i assist",
         "thank you for reaching out", "we apologize", "i will escalate",
         "as per our policy", "i understand your concern", "can you provide",
-        "i’ll be happy to", "is there anything else"
+        "i’ll be happy to", "is there anything else",
     ]
     agent_keywords = [kw.lower() for kw in agent_keywords]
 
@@ -89,23 +89,22 @@ def detect_roles_from_keywords(aligned_transcript):
             "speaker": role,
             "text": entry["text"],
             "start": entry["start"],
-            "end": entry["end"]
+            "end": entry["end"],
         })
 
     return updated
 def detect_roles_by_line_keywords(aligned_transcript):
-    """
-    Detects roles (Agent or Customer) for each line based on presence of role-specific keywords.
+    """Detects roles (Agent or Customer) for each line based on presence of role-specific keywords.
     """
     agent_keywords = [
         "please hold", "let me check", "i can help", "how may i assist",
         "thank you for reaching out", "we apologize", "i will escalate",
         "as per our policy", "i understand your concern", "can you provide",
-        "i’ll be happy to", "is there anything else"
+        "i’ll be happy to", "is there anything else",
     ]
     customer_keywords = [
         "i need", "i want", "i have a problem", "help me", "my order",
-        "issue with", "i didn’t receive", "can you fix", "i’m not happy", "i want a refund"
+        "issue with", "i didn’t receive", "can you fix", "i’m not happy", "i want a refund",
     ]
 
     agent_keywords = [kw.lower() for kw in agent_keywords]
@@ -131,7 +130,7 @@ def detect_roles_by_line_keywords(aligned_transcript):
             "speaker": role,
             "text": entry["text"],
             "start": entry["start"],
-            "end": entry["end"]
+            "end": entry["end"],
         })
 
     return updated_transcript

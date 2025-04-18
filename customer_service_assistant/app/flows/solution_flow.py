@@ -1,5 +1,7 @@
 from prefect import flow, task
+
 from app.services.solution import suggest_solution
+
 
 @task
 def solution_analysis(text: str) -> str:

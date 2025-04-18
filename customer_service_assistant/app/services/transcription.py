@@ -1,10 +1,15 @@
 # app/services/transcription.py
 
-import tempfile
 import os
-from fastapi import UploadFile
+import tempfile
+
+from app.services.speaker_id import (
+    align_transcript_with_speakers,
+    detect_roles_by_line_keywords,
+    simple_speaker_diarization,
+    transcribe_audio,
+)
 from app.utils.logging_server import setup_logger
-from app.services.speaker_id import simple_speaker_diarization, transcribe_audio, align_transcript_with_speakers, detect_roles_by_line_keywords
 
 logger = setup_logger("Transcription")
 
@@ -25,7 +30,7 @@ async def transcribe_audio_and_identify_speakers(file_bytes: bytes, filename: st
         return {
             "transcript": aligned,
             "raw_transcript": transcript,
-            "speaker_segments": speakers
+            "speaker_segments": speakers,
         }
 
     except Exception as e:

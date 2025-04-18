@@ -1,5 +1,7 @@
 from prefect import flow, task
+
 from app.services.response_template import suggest_response_template
+
 
 @task
 def template_analysis(text: str) -> str:

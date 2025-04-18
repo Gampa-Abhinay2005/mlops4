@@ -1,5 +1,7 @@
 from prefect import flow, task
+
 from app.services.intent import get_intent_from_llm
+
 
 @task
 def intent_analysis(text: str) -> str:

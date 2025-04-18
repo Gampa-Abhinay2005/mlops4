@@ -1,5 +1,7 @@
 from prefect import flow, task
-from app.services.retrieval import retrieve_relevant_info, get_retrieval_from_llm
+
+from app.services.retrieval import get_retrieval_from_llm, retrieve_relevant_info
+
 
 @task
 def chat_analysis(text: str) -> str:

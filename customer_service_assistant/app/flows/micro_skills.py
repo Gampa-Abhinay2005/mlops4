@@ -1,5 +1,7 @@
 from prefect import flow, task
+
 from app.services.micro_skills import evaluate_skills
+
 
 @task
 def evalute_analysis(text: str) -> str:
