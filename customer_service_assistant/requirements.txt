@@ -1,0 +1,11 @@
+fastapi
+httpx
+uvicorn
+loguru
+pydantic
+pyyaml
+ollama
+streamlit
+watchdog
+toml
+zmq

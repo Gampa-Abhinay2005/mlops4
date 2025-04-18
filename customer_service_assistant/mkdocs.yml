@@ -1,0 +1,8 @@
+site_name: Customer Service Assistant
+theme:
+  name: material
+
+nav:
+  - Architecture: architecture.md
+  - How To Use: usage.md
+  - Reflection: experience.md

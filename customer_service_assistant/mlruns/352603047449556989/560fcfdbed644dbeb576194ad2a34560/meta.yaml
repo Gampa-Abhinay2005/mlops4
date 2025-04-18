@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Abhi/Desktop/mlops/mlops4/customer_service_assistant/mlruns/352603047449556989/560fcfdbed644dbeb576194ad2a34560/artifacts
+end_time: 1744998723650
+entry_point_name: ''
+experiment_id: '352603047449556989'
+lifecycle_stage: active
+run_id: 560fcfdbed644dbeb576194ad2a34560
+run_name: customer_service_call_fixed.wav
+run_uuid: 560fcfdbed644dbeb576194ad2a34560
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1744998714974
+status: 3
+tags: []
+user_id: Abhi

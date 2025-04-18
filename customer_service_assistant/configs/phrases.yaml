@@ -1,0 +1,11 @@
+required_phrases:
+  greetings:
+    - good morning
+    - good evening
+    - hello
+  disclaimers:
+    - this call will be recorded
+
+prohibited_phrases:
+  - shit
+  - damn

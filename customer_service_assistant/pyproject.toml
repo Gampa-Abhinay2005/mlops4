@@ -1,0 +1,14 @@
+[project]
+name = "customer_service_assistant"
+version = "0.1.0"
+dependencies = [
+    "fastapi",
+    "httpx",
+    "uvicorn",
+    "loguru",
+    "pydantic",
+    "pyyaml",
+    "ollama",
+    "streamlit",
+    "watchdog"
+]
