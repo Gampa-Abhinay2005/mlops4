@@ -14,7 +14,6 @@ from app.flows.categorization import categorize_flow
 from app.flows.micro_skills import evaluate_flow
 from app.flows.solution_flow import solution_flow
 from app.flows.ticket import ticket_flow
-from app.services.transcription import transcribe_audio_and_identify_speakers
 
 app = FastAPI()
 
