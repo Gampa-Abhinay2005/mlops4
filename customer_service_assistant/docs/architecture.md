@@ -40,38 +40,38 @@ The **Customer Service Assistant** is a modular, AI-powered platform built to en
 ```mermaid
 graph TD
   A[Customer UI] -->|Sends Message| B[Message Router]
-  A2[Agent UI] -->|Receives & Acts| B
+  A2[Agent UI] -->|Receives/Replies| B
+  A3[Transcription UI] -->|Uploads Audio| B
   B --> C[LLM Engine]
-  B --> D[Knowledge Base Retriever]
-  B --> E[Transcript Memory]
-
+  B --> D[Knowledge Retriever]
+  B --> M[Audio Processing Engine]
   C --> F1[Sentiment Analysis]
   C --> F2[Intent Detection]
   C --> F3[Response Suggestion]
   C --> F4[Summarization]
-
   D --> G[Markdown Documents]
-  E --> H[Past Transcripts]
-
+  M --> N1[Whisper Transcription]
+  M --> N2[Speaker Segmentation]
+  M --> N3[Role Detection]
   B --> I[Prefect Workflows]
   I --> J1[Ticket Creation]
   I --> J2[Quality Checks]
   I --> J3[Conversation Categorization]
   I --> J4[Micro-Skill Evaluation]
   I --> K[Docker Services]
-
   B --> L[MLflow Logging]
 
   subgraph Frontend
     A
     A2
+    A3
   end
 
   subgraph Backend
     B
     C
     D
-    E
+    M
     I
     K
     L
