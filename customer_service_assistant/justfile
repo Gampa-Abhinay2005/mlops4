@@ -1,5 +1,21 @@
-setup:
-	uv pip install -r requirements.txt || uv venv && uv pip install -r requirements.txt
+set shell := ["bash", "-ce"]
+set dotenv-load
 
+# --- Configuration ---
+venv := ".venv"
+# --- Setup Commands ---
+setup:
+    uv venv --python=python3.11 {{venv}}
+    cd customer_service_assistant source {{venv}}/Scripts/activate && uv pip install -r requirements.txt
+
+# --- Run All Services ---
 run:
-	python -m app.main
+    cd customer_service_assistant && \
+		source {{venv}}/Scripts/activate && \
+    uvicorn app.api.endpoints:app --reload & \
+    uv run streamlit run app.py
+
+clean:
+    echo "🧹 Cleaning environment..."
+    rm -rf {{venv}}
+    echo "✅ Project cleaned"
